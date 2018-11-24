@@ -6,19 +6,24 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     // Added the "?" after "event" to handle any null conditions.  This is called a safe navigator.
     //Added *ngIf to logically display the div if there is data to display.  The data will not be rendered with ngIf.
     //Used the [hidden] property in DOM to hide the div now.  Used this technique to render the div so you can use a button to toggle it.
-
+    //Used ngSwitch to choose what span will be displayed in a div.
 
     template: `
     <div class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
-        <div>Time: {{event?.time}}</div>
+        <div [ngSwitch]="event?.time">
+            Time: {{event?.time}}
+            <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+            <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+            <span *ngSwitchDefault>(Normal Start)</span>
+        </div>
         <div>Price: \${{event?.price}}</div>
-        <div [hidden]="!event?.location">
+        <div *ngIf="event?.location">
             <span>Location: {{event?.location?.address}}</span>
             <span class="pad-left">{{event?.location?.city}}, {{event?.location?.country}}</span>
         </div>
-        <div [hidden]="!event?.onlineUrl">
+        <div *ngIf="event?.onlineUrl">
             Online URL: {{event.onlineUrl}}
         </div>
         <button class="btn btn-primary" (click)="handleClickMe()">Click Me!</button>
