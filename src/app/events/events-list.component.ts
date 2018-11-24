@@ -2,11 +2,14 @@ import { Component } from '@angular/core'
 
 @Component({
     selector: 'events-list',
+          // *ngFor is a structural directive; they change the DOM. They change the structure of the DOM
+          // "events" is the array to loop through.
+          // The [event] object is the found in the template file and is assigned each event in iteration.
     template: `
     <div><h1>Upcoming Angular Events</h1>
         <hr/>
         <div class="row">
-          <div *ngFor="let event of events" class="col-md-5">
+          <div *ngFor="let event of events" class="col-md-5"> 
              <event-thumbnail #thumbnail (eventClick)="handleEventClicked($event)" [event]="event"></event-thumbnail>
            </div>
         </div>     
@@ -101,11 +104,7 @@ export class EventsListComponent {
           time: '9:00 am',
           price: 950.00,
           imageUrl: '/assets/images/ng-nl.png',
-          location: {
-            address: 'The NG-NL Convention Center & Scuba Shop',
-            city: 'Amsterdam',
-            country: 'Netherlands'
-          },
+          onlineUrl: 'http://ng-nl.org/',
           sessions: [
             {
               id: 1,
