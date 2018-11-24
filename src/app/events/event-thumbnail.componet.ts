@@ -7,12 +7,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     //Added *ngIf to logically display the div if there is data to display.  The data will not be rendered with ngIf.
     //Used the [hidden] property in DOM to hide the div now.  Used this technique to render the div so you can use a button to toggle it.
     //Used ngSwitch to choose what span will be displayed in a div.
+    //Class Binding to update the CSS class.  [class.green]
 
     template: `
     <div class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
-        <div [ngSwitch]="event?.time">
+        <div [class.green]="event?.time === '8:00 am'" [ngSwitch]="event?.time">
             Time: {{event?.time}}
             <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
@@ -30,6 +31,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     </div>
     `,
     styles: [`
+        .green { color: #003300 !important; }
+        .bold { font-weight: bold; }
         .pad-left { margin-left: 10px; }
         .well div { color: #bbb; }
         .thumbnail { min-height: 250px; }
