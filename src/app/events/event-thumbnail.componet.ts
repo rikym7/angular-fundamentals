@@ -4,7 +4,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     selector: 'event-thumbnail',
 
     // Added the "?" after "event" to handle any null conditions.  This is called a safe navigator.
-    //Added *ngIf to logically display the div if there is data to display.
+    //Added *ngIf to logically display the div if there is data to display.  The data will not be rendered with ngIf.
+    //Used the [hidden] property in DOM to hide the div now.  Used this technique to render the div so you can use a button to toggle it.
+
 
     template: `
     <div class="well hoverwell thumbnail">
@@ -12,11 +14,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
         <div>Date: {{event?.date}}</div>
         <div>Time: {{event?.time}}</div>
         <div>Price: \${{event?.price}}</div>
-        <div *ngIf="event?.location">
+        <div [hidden]="!event?.location">
             <span>Location: {{event?.location?.address}}</span>
             <span class="pad-left">{{event?.location?.city}}, {{event?.location?.country}}</span>
         </div>
-        <div *ngIf="event?.onlineUrl">
+        <div [hidden]="!event?.onlineUrl">
             Online URL: {{event.onlineUrl}}
         </div>
         <button class="btn btn-primary" (click)="handleClickMe()">Click Me!</button>
