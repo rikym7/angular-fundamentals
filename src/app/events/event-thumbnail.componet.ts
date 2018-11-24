@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     //Added *ngIf to logically display the div if there is data to display.  The data will not be rendered with ngIf.
     //Used the [hidden] property in DOM to hide the div now.  Used this technique to render the div so you can use a button to toggle it.
     //Used ngSwitch to choose what span will be displayed in a div.
-    //Class Binding to update the CSS class.  [class.green]
+    //Class Binding to update the CSS class.  [class.green] - this would be added to any class already applied to div.
     //Used [ngClass] now to set two CSS class values - green AND bold
     //Used a function call to set the two properties for the
 
@@ -15,7 +15,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     <div class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
-        <div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
+        <div class='well' [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
             Time: {{event?.time}}
             <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
@@ -59,6 +59,20 @@ export class EventThumbnailComponent {
     getStartTimeClass() {
         const isEarlyStart = this.event && this.event.time === '8:00 am'
         return {green: isEarlyStart, bold: isEarlyStart}
+    }
+
+    alterGetStartTimeClass() {
+        //Alternate method to setting the CSS properties - return a string
+        if (this.event && this.event.time === '8:00 am')
+            return 'green bold'
+        return ''
+    }
+
+    alter2GetStartTimeClass() {
+        //Alternate method to setting the CSS properties - return an array
+        if (this.event && this.event.time === '8:00 am')
+            return ['green', 'bold']
+        return []
     }
 
 }
