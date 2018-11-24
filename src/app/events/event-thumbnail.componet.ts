@@ -8,12 +8,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     //Used the [hidden] property in DOM to hide the div now.  Used this technique to render the div so you can use a button to toggle it.
     //Used ngSwitch to choose what span will be displayed in a div.
     //Class Binding to update the CSS class.  [class.green]
+    //Used [ngClass] now to set two CSS class values - green AND bold
 
     template: `
     <div class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
-        <div [class.green]="event?.time === '8:00 am'" [ngSwitch]="event?.time">
+        <div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am' }" [ngSwitch]="event?.time">
             Time: {{event?.time}}
             <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
