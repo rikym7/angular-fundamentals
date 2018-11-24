@@ -9,13 +9,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     //Used ngSwitch to choose what span will be displayed in a div.
     //Class Binding to update the CSS class.  [class.green] - this would be added to any class already applied to div.
     //Used [ngClass] now to set two CSS class values - green AND bold
-    //Used a function call to set the two properties for the
+    //Used a function call to set the two properties for the CSS
+    //used a Terinary statement to set the CSS in this example. [ngStyle]
 
     template: `
     <div class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
-        <div class='well' [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
+        <div [ngStyle]="{'color': event?.time === '8:00 am' ? '#003300' : '#bbb', 'font-weight' : event?.time === '8:00 am' ? 'bold' : 'normal'}" [ngSwitch]="event?.time">
             Time: {{event?.time}}
             <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
