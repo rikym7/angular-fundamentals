@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service';
-
+import { ToastrService } from '../common/toastr.service'
+ 
 declare let toastr //lets TS know this is globally defined elsewhere
 
 @Component({
@@ -23,7 +24,7 @@ declare let toastr //lets TS know this is globally defined elsewhere
 export class EventsListComponent implements OnInit {
     events:any[]
 
-    constructor(private eventService: EventService) {
+    constructor(private eventService: EventService, private toastr: ToastrService) {
       //Still need this contructor becuase this is where the service gets injected.
     }
 
@@ -38,6 +39,7 @@ export class EventsListComponent implements OnInit {
 
     handleThumbnailClick(eventName){
       console.log('received: ', eventName)
-      toastr.success(eventName)
+      //not using a global service any longer and using a injectable service now.
+      this.toastr.success(eventName)
   }
 }
