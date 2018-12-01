@@ -1,5 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service';
+
+declare let toastr //lets TS know this is globally defined elsewhere
 
 @Component({
     selector: 'events-list',
@@ -11,14 +13,14 @@ import { EventService } from './shared/event.service';
         <hr/>
         <div class="row">
           <div *ngFor="let event of events" class="col-md-5"> 
-             <event-thumbnail #thumbnail (eventClick)="handleEventClicked($event)" [event]="event"></event-thumbnail>
+             <event-thumbnail #thumbnail (click)="handleThumbnailClick(event.name)" [event]="event"></event-thumbnail>
            </div>
         </div>     
     </div>
     `
 })
 
-export class EventsListComponent {
+export class EventsListComponent implements OnInit {
     events:any[]
 
     constructor(private eventService: EventService) {
@@ -33,4 +35,9 @@ export class EventsListComponent {
     handleEventClicked(data){
         console.log('received: ', data)
     }
+
+    handleThumbnailClick(eventName){
+      console.log('received: ', eventName)
+      toastr.success(eventName)
+  }
 }
