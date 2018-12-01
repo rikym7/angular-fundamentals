@@ -21,9 +21,13 @@ import { EventService } from './shared/event.service';
 export class EventsListComponent {
     events:any[]
 
-    constructor(private eventService: EventService){
-      this.events = this.eventService.getEvents()
+    constructor(private eventService: EventService) {
+      //Still need this contructor becuase this is where the service gets injected.
+    }
 
+    //Best practice to have this constructor moved to the ngOnInit() - LifeCycle Event - called when the component it loaded
+    ngOnInit() {
+      this.events = this.eventService.getEvents()
     }
 
     handleEventClicked(data){
