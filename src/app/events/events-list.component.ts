@@ -5,7 +5,7 @@ import { ToastrService } from '../common/toastr.service'
 declare let toastr //lets TS know this is globally defined elsewhere
 
 @Component({
-    selector: 'events-list',
+    //selector: 'events-list', //No longer need since we added the Router
           // *ngFor is a structural directive; they change the DOM. They change the structure of the DOM
           // "events" is the array to loop through.
           // The [event] object is the found in the template file and is assigned each event in iteration.
