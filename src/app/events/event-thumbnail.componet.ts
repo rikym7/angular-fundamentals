@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     //used a Terinary statement to set the CSS in this example. [ngStyle]
 
     template: `
-    <div class="well hoverwell thumbnail">
+    <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
         <h2>{{event?.name}}</h2>
         <div>Date: {{event?.date}}</div>
         <div [ngStyle]="getStartTimeStyle()" [ngSwitch]="event?.time">
