@@ -22,7 +22,7 @@ declare let toastr //lets TS know this is globally defined elsewhere
 })
 
 export class EventsListComponent implements OnInit {
-    events:any[]
+    events:any //removed the [] to stop the TypeScript complaint when using the subscription
 
     constructor(private eventService: EventService, private toastr: ToastrService) {
       //Still need this contructor becuase this is where the service gets injected.
@@ -30,7 +30,8 @@ export class EventsListComponent implements OnInit {
 
     //Best practice to have this constructor moved to the ngOnInit() - LifeCycle Event - called when the component it loaded
     ngOnInit() {
-      this.events = this.eventService.getEvents()
+      //set this.events to only be set when the data is actually received from subscriptions
+      this.eventService.getEvents().subscribe(events => { this.events = events}) 
     }
 
     handleEventClicked(data){

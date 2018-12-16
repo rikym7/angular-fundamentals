@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core'
+import { Subject } from 'rxjs'
 
 //Best Practive to include the @Injectable decorator.  Required if you are going to have other injectible services called in the class.  Like with calling HTTP REST
 
 @Injectable()
 export class EventService {
     getEvents() {
-        return EVENTS
+        let subject = new Subject() //Subject is a type of Observable
+        setTimeout(() => {subject.next(EVENTS); subject.complete();}, 100) //simulating the loading of data to subject
+        return subject //return the observable versus the EVENT data directly
     }
 
     getEvent(id:number) {
