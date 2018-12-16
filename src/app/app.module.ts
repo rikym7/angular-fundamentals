@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ComponentFactoryResolver } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EventsAppComponent } from './events-app.component';
 import { EventsListComponent} from './events/events-list.component';
@@ -29,7 +29,20 @@ import { appRoutes } from './routes';
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [EventService, ToastrService, EventRouteActivator],
+  providers: [
+    EventService, 
+    ToastrService, 
+    EventRouteActivator,
+    {
+      //adding a function as a Route Guard against leaving Create Event too soon.
+      provide: 'canDeactivateCreateEvent',
+      useValue: checkDirtyState
+    }
+  ],
   bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
+
+export function checkDirtyState() {
+    return false
+}
