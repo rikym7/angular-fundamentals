@@ -43,6 +43,8 @@ import { appRoutes } from './routes';
 })
 export class AppModule { }
 
-export function checkDirtyState() {
-    return false
+export function checkDirtyState(component:CreateEventComponent) {
+    if (component.isDirty)
+      return window.confirm('You have not saved this event, do you want to really cancel?')
+    return true
 }
