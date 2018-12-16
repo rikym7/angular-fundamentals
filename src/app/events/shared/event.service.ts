@@ -7,7 +7,7 @@ import { Subject } from 'rxjs'
 export class EventService {
     getEvents() {
         let subject = new Subject() //Subject is a type of Observable
-        setTimeout(() => {subject.next(EVENTS); subject.complete();}, 100) //simulating the loading of data to subject
+        setTimeout(() => {subject.next(EVENTS); subject.complete();}, 2000) //simulating the loading of data to subject
         return subject //return the observable versus the EVENT data directly
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { EventService } from './shared/event.service';
+import { EventService } from './shared/event.service'
 import { ToastrService } from '../common/toastr.service'
+import { ActivatedRoute } from '@angular/router'
  
 declare let toastr //lets TS know this is globally defined elsewhere
 
@@ -24,14 +25,17 @@ declare let toastr //lets TS know this is globally defined elsewhere
 export class EventsListComponent implements OnInit {
     events:any //removed the [] to stop the TypeScript complaint when using the subscription
 
-    constructor(private eventService: EventService, private toastr: ToastrService) {
+    constructor(private eventService: EventService, private toastr: ToastrService, 
+      private route:ActivatedRoute) {
       //Still need this contructor becuase this is where the service gets injected.
     }
 
     //Best practice to have this constructor moved to the ngOnInit() - LifeCycle Event - called when the component it loaded
     ngOnInit() {
       //set this.events to only be set when the data is actually received from subscriptions
-      this.eventService.getEvents().subscribe(events => { this.events = events}) 
+      //this.eventService.getEvents().subscribe(events => { this.events = events})
+      //Now we can get the event data off the route that was from the resolver 
+      this.events = this.route.snapshot.data['events']
     }
 
     handleEventClicked(data){

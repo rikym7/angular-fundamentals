@@ -12,6 +12,7 @@ import { CreateEventComponent } from './events/create-event.component';
 import { Error404Component } from './errors/404.component';
 import { EventRouteActivator } from './events/event-details/event-route-activator.service';
 import { appRoutes } from './routes';
+import { EventListResolver } from './events/events-list-resolver.service'
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { appRoutes } from './routes';
     EventService, 
     ToastrService, 
     EventRouteActivator,
+    EventListResolver,
     {
       //adding a function as a Route Guard against leaving Create Event too soon.
       provide: 'canDeactivateCreateEvent',
