@@ -8,11 +8,11 @@ export interface IEvent {
     location?: {
         address: string
         city: string
-        state: string
+        state?: string
+        country?: string
     }
     onlineUrl?: string
     sessions: ISession[]
-    country: string
 }
 
 export interface ISession {
