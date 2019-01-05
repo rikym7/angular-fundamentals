@@ -7,7 +7,8 @@ import { Component } from '@angular/core'
 })
 
 export class LoginComponent {
-
+    userName: string
+    password: string
     login(formValues) {
         console.log(formValues)
     }
