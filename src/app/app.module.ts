@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ComponentFactoryResolver } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from './user/auth.service'
 
 import {
   EventsListComponent,
@@ -45,6 +46,7 @@ import { appRoutes } from './routes';
   providers: [
     EventService, 
     ToastrService, 
+    AuthService,
     EventRouteActivator,
     EventListResolver,
     {
